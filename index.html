@@ -11,14 +11,23 @@
 
 <!-- =========================================================
      VIDEO INTRODUCTORIO
+     Video de YouTube.
      El mismo video acompaña las primeras 4 pantallas.
      ========================================================= -->
 <div id="videoIntroWrap">
-    <video id="videoIntro" muted playsinline preload="auto">
-        <source src="videos/Oficial_video.mp4" type="video/mp4">
-    </video>
+
+    <iframe
+        id="videoIntro"
+        src="https://www.youtube.com/embed/TGpfXoKi8Dg?autoplay=1&mute=1&controls=0&loop=1&playlist=TGpfXoKi8Dg&playsinline=1"
+        title="Video introductorio"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+    </iframe>
+
     <div class="video-dark"></div>
     <div class="video-vignette"></div>
+
 </div>
 
 <main id="presentacion">
@@ -364,7 +373,10 @@
                 </div>
 
                 <div class="lineas-doc">
-                    <i></i><i></i><i></i><i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
                 </div>
 
                 <div class="firma-box">
@@ -502,6 +514,7 @@
                     <div class="mar">
                         <div class="barco-grafico">▰</div>
                     </div>
+
                     <div class="contenedor c-a"></div>
                     <div class="contenedor c-b"></div>
                     <div class="contenedor c-c"></div>
@@ -543,6 +556,7 @@
                 <div class="rio-graphic">
                     <div class="rio-line"></div>
                     <div class="rio-barco">▶</div>
+
                     <div class="rio-punto rp1">ORIGEN</div>
                     <div class="rio-punto rp2">PUERTO</div>
                     <div class="rio-punto rp3">DESTINO</div>
@@ -684,6 +698,7 @@
                 Cada elemento cumple una función dentro de un mismo sistema:
                 facilitar, controlar y ordenar el comercio exterior.
             </p>
+
         </div>
     </section>
 
@@ -711,6 +726,7 @@
             </p>
 
             <div class="gracias">GRACIAS</div>
+
         </div>
     </section>
 
@@ -731,7 +747,12 @@
 
     <button id="btnSiguiente" aria-label="Siguiente">›</button>
 
-    <button id="btnPantalla" class="pantalla" aria-label="Pantalla completa">⛶</button>
+    <button
+        id="btnPantalla"
+        class="pantalla"
+        aria-label="Pantalla completa">
+        ⛶
+    </button>
 
 </div>
 
