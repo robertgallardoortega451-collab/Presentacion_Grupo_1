@@ -1,0 +1,1614 @@
+/* =========================================================
+   GRUPO 1 — PRESENTACIÓN CINEMATOGRÁFICA
+   ========================================================= */
+
+:root {
+    --verde: #008c82;
+    --verde-claro: #54e0c5;
+    --verde-suave: #63c7b5;
+    --oscuro: #041514;
+    --negro: #020707;
+    --blanco: #f5fffd;
+    --gris: #b8cfcc;
+    --linea: rgba(84,224,197,.25);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    background: var(--oscuro);
+    color: var(--blanco);
+}
+
+button {
+    font: inherit;
+}
+
+
+/* =========================================================
+   PRESENTACIÓN
+   ========================================================= */
+
+#presentacion {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+}
+
+
+/* =========================================================
+   VIDEO INTRO
+   ========================================================= */
+
+#videoIntroWrap {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: #000;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .8s ease;
+}
+
+#videoIntroWrap.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+#videoIntro {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-dark {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(0,0,0,.75), rgba(0,0,0,.22), rgba(0,0,0,.65));
+}
+
+.video-vignette {
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 180px rgba(0,0,0,.9);
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   ESCENAS
+   ========================================================= */
+
+.escena {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 60px 7vw;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.035);
+
+    transition:
+        opacity .65s ease,
+        transform .65s ease,
+        visibility .65s;
+
+    overflow: hidden;
+    z-index: 5;
+
+    background:
+        radial-gradient(circle at 80% 20%, rgba(84,224,197,.10), transparent 25%),
+        radial-gradient(circle at 20% 80%, rgba(0,140,130,.10), transparent 28%),
+        linear-gradient(135deg, #071c1b, #03100f 70%);
+}
+
+.escena.activa {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+    z-index: 10;
+}
+
+.escena-video {
+    background: transparent;
+}
+
+.escena-video.activa {
+    z-index: 10;
+}
+
+
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
+
+.contenido {
+    position: relative;
+    z-index: 20;
+    width: min(1250px, 90vw);
+    max-height: 88vh;
+}
+
+.portada {
+    text-align: center;
+}
+
+.eyebrow {
+    display: inline-block;
+    color: var(--verde-claro);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+}
+
+h1,
+h2,
+h3,
+p {
+    margin: 0;
+}
+
+h1 {
+    font-size: clamp(42px, 6vw, 82px);
+    line-height: .98;
+    letter-spacing: -3px;
+    font-weight: 800;
+}
+
+h1 span,
+h2 span {
+    display: block;
+    color: var(--verde-claro);
+}
+
+h2 {
+    font-size: clamp(38px, 5vw, 70px);
+    line-height: 1;
+    letter-spacing: -2px;
+    font-weight: 800;
+}
+
+h3 {
+    letter-spacing: .5px;
+}
+
+.subtitulo {
+    margin-top: 30px;
+    font-size: 21px;
+    color: #d2e7e4;
+}
+
+.linea-reveal {
+    margin: 45px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    color: #c4dad7;
+    font-size: 11px;
+    letter-spacing: 3px;
+}
+
+.linea-reveal span {
+    width: 70px;
+    height: 1px;
+    background: var(--verde-claro);
+}
+
+
+/* =========================================================
+   ANIMACIONES DE ENTRADA
+   ========================================================= */
+
+.reveal {
+    animation: revealUp .9s both;
+}
+
+.delay1 { animation-delay: .15s; }
+.delay2 { animation-delay: .3s; }
+.delay3 { animation-delay: .5s; }
+
+@keyframes revealUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   TOPLINE
+   ========================================================= */
+
+.topline {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 35px;
+    color: var(--verde-claro);
+    font-size: 12px;
+    letter-spacing: 3px;
+}
+
+.topline span {
+    font-size: 26px;
+    font-weight: 800;
+    opacity: .8;
+}
+
+.topline.dark {
+    color: var(--verde);
+}
+
+
+/* =========================================================
+   PRINCIPIOS
+   ========================================================= */
+
+.layout-principios {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 55px;
+    align-items: center;
+}
+
+.titulo-lateral small,
+.territorio-texto small,
+.digital-copy small,
+.puerto-copy small,
+.rio-copy small,
+.empresas-copy small,
+.responsabilidad-titulo small {
+    color: var(--verde-claro);
+    letter-spacing: 3px;
+    font-size: 11px;
+}
+
+.titulo-lateral h2 {
+    margin: 15px 0 20px;
+}
+
+.titulo-lateral p {
+    color: #d0e2df;
+    line-height: 1.7;
+    font-size: 17px;
+}
+
+.cards3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.glass-card {
+    min-height: 250px;
+    padding: 25px;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 20px;
+    background: rgba(3,25,23,.45);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 20px 50px rgba(0,0,0,.2);
+    transition: transform .3s ease, border-color .3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--verde-claro);
+}
+
+.icono-card {
+    color: var(--verde-claro);
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.glass-card h3 {
+    font-size: 17px;
+    color: white;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+}
+
+.glass-card p {
+    color: #bdd2cf;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   TERRITORIO
+   ========================================================= */
+
+.territorio-hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 80px;
+}
+
+.territorio-texto h2 {
+    margin: 15px 0 25px;
+}
+
+.territorio-texto p {
+    color: #d0e2df;
+    max-width: 650px;
+    line-height: 1.7;
+    font-size: 19px;
+}
+
+.dato-linea {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 35px;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--verde-claro);
+}
+
+.pulso {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--verde-claro);
+    box-shadow: 0 0 20px var(--verde-claro);
+    animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+    50% { transform: scale(1.8); opacity: .5; }
+}
+
+.mapa-orbita {
+    height: 390px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.orbita {
+    width: 310px;
+    height: 310px;
+    border: 1px solid rgba(84,224,197,.4);
+    border-radius: 50%;
+    box-shadow: 0 0 70px rgba(84,224,197,.08);
+    animation: spin 18s linear infinite;
+}
+
+.orbita::after {
+    content: "";
+    position: absolute;
+    inset: 35px;
+    border: 1px solid rgba(84,224,197,.15);
+    border-radius: 50%;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.bolivia {
+    position: absolute;
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 6px;
+    color: white;
+    text-shadow: 0 0 35px rgba(84,224,197,.5);
+}
+
+.punto-orbita {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--verde-claro);
+    box-shadow: 0 0 25px var(--verde-claro);
+}
+
+.p1 { top: 55px; right: 100px; }
+.p2 { bottom: 70px; left: 110px; }
+.p3 { top: 170px; right: 15px; }
+
+
+/* =========================================================
+   ZONAS
+   ========================================================= */
+
+.titulo-centro {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.comparacion {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    align-items: center;
+    gap: 15px;
+}
+
+.zona {
+    padding: 32px;
+    min-height: 315px;
+    border-radius: 24px;
+    background: rgba(2,20,19,.55);
+    border: 1px solid rgba(255,255,255,.13);
+    position: relative;
+    overflow: hidden;
+}
+
+.zona::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    right: -80px;
+    bottom: -100px;
+    background: rgba(84,224,197,.1);
+}
+
+.zona-primaria {
+    border-color: rgba(84,224,197,.5);
+}
+
+.zona-secundaria {
+    border-color: rgba(255,255,255,.18);
+}
+
+.zona-numero {
+    font-size: 52px;
+    font-weight: 800;
+    color: rgba(84,224,197,.25);
+}
+
+.zona-etiqueta {
+    color: var(--verde-claro);
+    letter-spacing: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.zona h3 {
+    margin-top: 18px;
+    font-size: 21px;
+}
+
+.zona p {
+    color: #bdd1ce;
+    line-height: 1.55;
+    margin-top: 12px;
+}
+
+.mini-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 25px;
+}
+
+.mini-lista span {
+    border: 1px solid rgba(84,224,197,.3);
+    border-radius: 30px;
+    padding: 7px 10px;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: #d7ebe8;
+}
+
+.versus {
+    width: 70px;
+    height: 70px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--verde-claro);
+    color: var(--verde-claro);
+    font-weight: 800;
+    font-size: 15px;
+    box-shadow: 0 0 35px rgba(84,224,197,.12);
+}
+
+
+/* =========================================================
+   ESCENA ESPECIAL / ADUANA
+   ========================================================= */
+
+.escena-especial {
+    background:
+        radial-gradient(circle at 20% 50%, rgba(84,224,197,.15), transparent 28%),
+        linear-gradient(135deg, #061817, #020807);
+}
+
+.decor-grid {
+    position: absolute;
+    inset: 0;
+    opacity: .14;
+    background-image:
+        linear-gradient(rgba(84,224,197,.3) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(84,224,197,.3) 1px, transparent 1px);
+    background-size: 70px 70px;
+    mask-image: linear-gradient(to right, black, transparent 70%);
+}
+
+.split {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    align-items: center;
+    gap: 90px;
+}
+
+.numero-fondo {
+    position: absolute;
+    right: -10px;
+    top: -70px;
+    font-size: 280px;
+    font-weight: 900;
+    color: rgba(84,224,197,.035);
+}
+
+.visual-institucion {
+    width: 390px;
+    height: 390px;
+    margin: auto;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.anillo {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(84,224,197,.35);
+}
+
+.anillo1 {
+    width: 280px;
+    height: 280px;
+    animation: spin 14s linear infinite;
+}
+
+.anillo2 {
+    width: 350px;
+    height: 350px;
+    border-style: dashed;
+    animation: spinReverse 20s linear infinite;
+}
+
+@keyframes spinReverse {
+    to { transform: rotate(-360deg); }
+}
+
+.escudo {
+    width: 145px;
+    height: 165px;
+    display: grid;
+    place-items: center;
+    clip-path: polygon(50% 0, 92% 16%, 82% 72%, 50% 100%, 18% 72%, 8% 16%);
+    background: linear-gradient(145deg, #54e0c5, #006d67);
+    color: #03201d;
+    font-size: 35px;
+    font-weight: 900;
+    box-shadow: 0 0 60px rgba(84,224,197,.25);
+}
+
+.texto-seccion .lead,
+.lead {
+    color: #c6dbd8;
+    line-height: 1.7;
+    font-size: 19px;
+    max-width: 700px;
+    margin-top: 28px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 35px;
+}
+
+.chips span {
+    padding: 11px 17px;
+    border: 1px solid rgba(84,224,197,.4);
+    border-radius: 40px;
+    color: var(--verde-claro);
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+
+/* =========================================================
+   RESPONSABILIDAD
+   ========================================================= */
+
+.responsabilidad {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.responsabilidad-titulo h2 {
+    margin-top: 15px;
+}
+
+.timeline {
+    position: relative;
+    display: grid;
+    gap: 20px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    top: 20px;
+    bottom: 20px;
+    width: 1px;
+    background: rgba(0,140,130,.5);
+}
+
+.timeline-item {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+    padding: 20px;
+    background: rgba(0,140,130,.05);
+    border: 1px solid rgba(0,140,130,.16);
+    border-radius: 18px;
+}
+
+.circulo {
+    position: relative;
+    z-index: 2;
+    min-width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #071b1a;
+    border: 1px solid var(--verde);
+    color: var(--verde);
+    font-weight: 800;
+}
+
+.timeline-item h3 {
+    color: var(--verde);
+    font-size: 15px;
+    letter-spacing: 2px;
+}
+
+.timeline-item p {
+    margin-top: 6px;
+    color: #6f8582;
+}
+
+
+/* =========================================================
+   TECNOLOGÍA
+   ========================================================= */
+
+.escena-tecnologia {
+    background:
+        radial-gradient(circle at 70% 50%, rgba(84,224,197,.13), transparent 35%),
+        #020d0c;
+}
+
+.digital {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    align-items: center;
+    gap: 70px;
+}
+
+.digital-copy h2 {
+    margin-top: 15px;
+}
+
+.digital-copy p {
+    margin-top: 25px;
+    color: #c3d8d5;
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.network {
+    width: 500px;
+    height: 390px;
+    margin: auto;
+    position: relative;
+}
+
+.node {
+    position: absolute;
+    padding: 13px 17px;
+    border: 1px solid rgba(84,224,197,.5);
+    background: rgba(3,28,26,.85);
+    border-radius: 12px;
+    color: var(--verde-claro);
+    font-size: 11px;
+    letter-spacing: 1px;
+    z-index: 3;
+    box-shadow: 0 0 25px rgba(84,224,197,.08);
+}
+
+.center-node {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 24px;
+    border-radius: 50%;
+    font-weight: 800;
+}
+
+.n1 { left: 0; top: 40px; }
+.n2 { right: 0; top: 55px; }
+.n3 { left: 0; bottom: 45px; }
+.n4 { right: 0; bottom: 40px; }
+
+.connection {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--verde), transparent);
+    transform-origin: left center;
+    opacity: .6;
+}
+
+.c1 { width: 210px; left: 115px; top: 155px; transform: rotate(-29deg); }
+.c2 { width: 205px; left: 260px; top: 155px; transform: rotate(28deg); }
+.c3 { width: 215px; left: 115px; top: 235px; transform: rotate(29deg); }
+.c4 { width: 205px; left: 260px; top: 235px; transform: rotate(-28deg); }
+
+
+/* =========================================================
+   FIRMA DIGITAL
+   ========================================================= */
+
+.firma-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 100px;
+}
+
+.documento-digital {
+    width: min(430px, 100%);
+    min-height: 340px;
+    padding: 28px;
+    margin: auto;
+    border: 1px solid rgba(0,140,130,.3);
+    border-radius: 18px;
+    background: #f0f7f5;
+    color: #08201d;
+    box-shadow: 0 30px 70px rgba(0,0,0,.35);
+    transform: rotate(-2deg);
+}
+
+.doc-top {
+    display: flex;
+    justify-content: space-between;
+    color: #58716e;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.doc-top b {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #54e0c5;
+    color: #05201d;
+}
+
+.lineas-doc {
+    margin-top: 35px;
+    display: grid;
+    gap: 14px;
+}
+
+.lineas-doc i {
+    display: block;
+    height: 7px;
+    background: #cddbd8;
+    border-radius: 10px;
+}
+
+.lineas-doc i:nth-child(2) { width: 80%; }
+.lineas-doc i:nth-child(3) { width: 92%; }
+.lineas-doc i:nth-child(4) { width: 62%; }
+
+.firma-box {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    border-radius: 12px;
+    background: #dcece8;
+}
+
+.firma-check {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #008c82;
+    color: white;
+}
+
+.firma-box strong {
+    display: block;
+    font-size: 12px;
+}
+
+.firma-box small {
+    display: block;
+    margin-top: 4px;
+    color: #66807c;
+}
+
+.firma-copy h2 {
+    margin-top: 15px;
+}
+
+.firma-copy .lead {
+    margin-top: 25px;
+}
+
+.seguridad-pasos {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 35px;
+}
+
+.seguridad-pasos span {
+    color: var(--verde);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.seguridad-pasos b {
+    color: #78918e;
+}
+
+
+/* =========================================================
+   VUCE
+   ========================================================= */
+
+.escena-vuce {
+    background:
+        radial-gradient(circle at 50% 50%, rgba(84,224,197,.11), transparent 40%),
+        #031110;
+}
+
+.vuce-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 40px;
+}
+
+.vuce-head small {
+    color: var(--verde-claro);
+    letter-spacing: 3px;
+    font-size: 11px;
+}
+
+.vuce-head h2 {
+    margin-top: 10px;
+    font-size: 100px;
+}
+
+.vuce-head p {
+    max-width: 400px;
+    color: #bed3d0;
+    line-height: 1.6;
+}
+
+.flujo {
+    margin-top: 70px;
+    display: grid;
+    grid-template-columns: 1fr 50px 1fr 50px 1fr 50px 1fr;
+    align-items: center;
+}
+
+.flujo-item {
+    padding: 25px 15px;
+    min-height: 150px;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px;
+    background: rgba(255,255,255,.025);
+}
+
+.flujo-item div {
+    color: rgba(84,224,197,.35);
+    font-size: 25px;
+    font-weight: 800;
+}
+
+.flujo-item strong {
+    display: block;
+    margin-top: 15px;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+.flujo-item span {
+    display: block;
+    margin-top: 10px;
+    color: #91aaa6;
+    font-size: 12px;
+}
+
+.flujo-item.destacado {
+    border-color: var(--verde-claro);
+    background: rgba(84,224,197,.07);
+    box-shadow: 0 0 50px rgba(84,224,197,.08);
+}
+
+.flecha-flujo {
+    text-align: center;
+    color: var(--verde-claro);
+    font-size: 25px;
+}
+
+
+/* =========================================================
+   ASP-B
+   ========================================================= */
+
+.escena-puerto {
+    background:
+        linear-gradient(180deg, #061917, #082927 65%, #03100f);
+}
+
+.puerto-layout {
+    display: grid;
+    grid-template-columns: .9fr 1.1fr;
+    align-items: center;
+    gap: 80px;
+}
+
+.puerto-copy h2 {
+    margin-top: 12px;
+    font-size: 110px;
+}
+
+.ruta-logistica {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 35px;
+    color: var(--verde-claro);
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.ruta-logistica b {
+    font-size: 20px;
+}
+
+.puerto-visual {
+    height: 330px;
+    position: relative;
+    border-bottom: 2px solid #4a7771;
+    overflow: hidden;
+}
+
+.mar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 125px;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(84,224,197,.08) 0,
+        rgba(84,224,197,.08) 2px,
+        transparent 2px,
+        transparent 18px
+    );
+}
+
+.barco-grafico {
+    position: absolute;
+    right: 80px;
+    bottom: 90px;
+    font-size: 80px;
+    color: #54e0c5;
+    transform: scaleX(2);
+}
+
+.contenedor {
+    position: absolute;
+    width: 75px;
+    height: 55px;
+    border: 2px solid rgba(84,224,197,.4);
+    background: rgba(0,109,103,.4);
+    bottom: 95px;
+}
+
+.c-a { left: 30px; }
+.c-b { left: 100px; bottom: 150px; }
+.c-c { left: 170px; }
+.c-d { left: 240px; bottom: 150px; }
+
+
+/* =========================================================
+   FLUVIAL
+   ========================================================= */
+
+.escena-rio {
+    background:
+        radial-gradient(circle at 80% 70%, rgba(0,140,130,.18), transparent 30%),
+        linear-gradient(145deg, #031312, #072a27);
+}
+
+.rio-layout {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    align-items: center;
+    gap: 80px;
+}
+
+.rio-copy h2 {
+    margin-top: 15px;
+}
+
+.rio-graphic {
+    height: 330px;
+    position: relative;
+}
+
+.rio-line {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 50%;
+    height: 70px;
+    border-top: 2px solid rgba(84,224,197,.55);
+    border-bottom: 2px solid rgba(84,224,197,.15);
+    border-radius: 50%;
+    transform: rotate(-5deg);
+}
+
+.rio-barco {
+    position: absolute;
+    left: 46%;
+    top: 44%;
+    color: var(--verde-claro);
+    font-size: 55px;
+    filter: drop-shadow(0 0 15px rgba(84,224,197,.5));
+    animation: navegar 4s ease-in-out infinite;
+}
+
+@keyframes navegar {
+    50% { transform: translateX(80px) translateY(-8px); }
+}
+
+.rio-punto {
+    position: absolute;
+    color: #9bb3b0;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.rp1 { left: 5%; top: 43%; }
+.rp2 { left: 47%; top: 63%; color: var(--verde-claro); }
+.rp3 { right: 5%; top: 48%; }
+
+
+/* =========================================================
+   FRONTERA / RMF
+   ========================================================= */
+
+.escena-frontera {
+    background:
+        linear-gradient(90deg, #071b1a 0 49.7%, #03100f 50% 100%);
+}
+
+.frontera {
+    display: grid;
+    grid-template-columns: 1fr 250px 1fr;
+    align-items: center;
+    gap: 30px;
+}
+
+.pais {
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 30px;
+}
+
+.pais-bolivia {
+    text-align: right;
+    border-right: 1px solid rgba(84,224,197,.2);
+}
+
+.pais-destino {
+    text-align: left;
+    border-left: 1px solid rgba(84,224,197,.2);
+}
+
+.bandera {
+    color: var(--verde-claro);
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.pais small {
+    color: #839b98;
+    margin-top: 10px;
+    letter-spacing: 2px;
+    font-size: 9px;
+}
+
+.puerta {
+    height: 180px;
+    border: 1px solid var(--verde-claro);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(84,224,197,.04);
+    box-shadow: 0 0 70px rgba(84,224,197,.08);
+}
+
+.puerta-linea {
+    width: 80px;
+    height: 2px;
+    background: var(--verde-claro);
+    margin-bottom: 18px;
+}
+
+.puerta-titulo {
+    font-size: 50px;
+    font-weight: 900;
+    color: var(--verde-claro);
+}
+
+.puerta span {
+    margin-top: 8px;
+    font-size: 8px;
+    letter-spacing: 2px;
+    color: #9ab2ae;
+}
+
+.frontera-copy {
+    text-align: center;
+    margin-top: 55px;
+}
+
+.frontera-copy h2 {
+    font-size: 42px;
+}
+
+.frontera-copy p {
+    max-width: 700px;
+    margin: 18px auto 0;
+    color: #a9c0bd;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   EMPRESAS
+   ========================================================= */
+
+.escena-empresas {
+    background:
+        radial-gradient(circle at 80% 50%, rgba(0,140,130,.12), transparent 35%),
+        #f0f5f3;
+    color: #08201d;
+}
+
+.escena-empresas .topline {
+    color: var(--verde);
+}
+
+.empresas-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.empresas-copy h2 {
+    margin-top: 15px;
+    color: #09201e;
+}
+
+.empresas-copy h2 span {
+    color: var(--verde);
+}
+
+.empresas-copy .lead {
+    color: #536a67;
+}
+
+.empresas-red {
+    height: 350px;
+    position: relative;
+}
+
+.empresa-nodo {
+    position: absolute;
+    padding: 15px 20px;
+    border: 1px solid rgba(0,140,130,.35);
+    border-radius: 12px;
+    background: rgba(255,255,255,.85);
+    color: var(--verde);
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    z-index: 3;
+    box-shadow: 0 12px 30px rgba(0,50,45,.08);
+}
+
+.nodo-centro {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 25px;
+    border-radius: 50%;
+}
+
+.nodo1 { left: 5%; top: 20%; }
+.nodo2 { right: 3%; top: 18%; }
+.nodo3 { right: 15%; bottom: 15%; }
+
+.empresa-linea {
+    position: absolute;
+    height: 1px;
+    background: var(--verde);
+    transform-origin: left;
+    opacity: .35;
+}
+
+.l1 { width: 180px; left: 105px; top: 145px; transform: rotate(20deg); }
+.l2 { width: 180px; left: 250px; top: 145px; transform: rotate(-20deg); }
+.l3 { width: 190px; left: 245px; top: 190px; transform: rotate(35deg); }
+
+
+/* =========================================================
+   SÍNTESIS
+   ========================================================= */
+
+.escena-sintesis {
+    background:
+        radial-gradient(circle at center, rgba(84,224,197,.12), transparent 45%),
+        #020b0a;
+}
+
+.mapa-conexion {
+    width: 800px;
+    max-width: 90vw;
+    height: 300px;
+    margin: 35px auto 0;
+    position: relative;
+}
+
+.conexion-nodo {
+    position: absolute;
+    padding: 13px 17px;
+    border: 1px solid rgba(84,224,197,.4);
+    border-radius: 30px;
+    background: #071b1a;
+    color: var(--verde-claro);
+    font-size: 10px;
+    letter-spacing: 2px;
+    z-index: 3;
+}
+
+.cn1 { left: 0; top: 20px; }
+.cn2 { left: 24%; top: 115px; }
+.cn3 { left: 45%; top: 25px; padding: 22px; border-color: var(--verde-claro); }
+.cn4 { right: 2%; top: 25px; }
+.cn5 { right: 12%; bottom: 20px; }
+.cn6 { left: 20%; bottom: 15px; }
+.cn7 { left: 48%; bottom: 5px; }
+
+.conexion-linea {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--verde), transparent);
+    transform-origin: left;
+    opacity: .45;
+}
+
+.cl1 { width: 240px; left: 90px; top: 62px; transform: rotate(18deg); }
+.cl2 { width: 210px; left: 280px; top: 135px; transform: rotate(-25deg); }
+.cl3 { width: 240px; left: 430px; top: 70px; transform: rotate(-5deg); }
+.cl4 { width: 240px; left: 520px; top: 120px; transform: rotate(40deg); }
+.cl5 { width: 260px; left: 230px; top: 205px; transform: rotate(-18deg); }
+.cl6 { width: 190px; left: 390px; top: 215px; transform: rotate(0deg); }
+
+.sintesis-texto {
+    max-width: 800px;
+    margin: 15px auto 0;
+    text-align: center;
+    color: #a9c1bd;
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FINAL
+   ========================================================= */
+
+.escena-final {
+    background:
+        radial-gradient(circle at center, rgba(84,224,197,.18), transparent 35%),
+        #020908;
+    text-align: center;
+}
+
+.final-glow {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border-radius: 50%;
+    background: rgba(84,224,197,.07);
+    filter: blur(80px);
+}
+
+.final-contenido {
+    text-align: center;
+}
+
+.final-contenido h2 {
+    font-size: clamp(42px, 6vw, 80px);
+}
+
+.final-contenido p {
+    color: #a7bfbc;
+    margin-top: 25px;
+}
+
+.final-line {
+    width: 120px;
+    height: 2px;
+    background: var(--verde-claro);
+    margin: 35px auto;
+}
+
+.gracias {
+    margin-top: 55px;
+    color: var(--verde-claro);
+    letter-spacing: 9px;
+    font-weight: 800;
+    font-size: 20px;
+}
+
+
+/* =========================================================
+   CONTROLES
+   ========================================================= */
+
+.controles {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border-radius: 50px;
+    background: rgba(0,10,9,.72);
+    border: 1px solid rgba(84,224,197,.15);
+    backdrop-filter: blur(14px);
+}
+
+.controles button {
+    width: 43px;
+    height: 43px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(84,224,197,.08);
+    color: white;
+    cursor: pointer;
+    transition: .25s;
+    font-size: 26px;
+}
+
+.controles button:hover {
+    background: var(--verde-claro);
+    color: #03201d;
+    transform: translateY(-2px);
+}
+
+.contador {
+    min-width: 70px;
+    text-align: center;
+    color: #9eb8b4;
+    font-size: 12px;
+}
+
+.contador strong {
+    color: var(--verde-claro);
+    font-size: 18px;
+}
+
+.pantalla {
+    margin-left: 5px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 950px) {
+
+    .escena {
+        padding: 35px 5vw;
+        overflow-y: auto;
+    }
+
+    .layout-principios,
+    .territorio-hero,
+    .split,
+    .responsabilidad,
+    .digital,
+    .firma-layout,
+    .puerto-layout,
+    .rio-layout,
+    .empresas-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .cards3 {
+        grid-template-columns: 1fr;
+    }
+
+    .glass-card {
+        min-height: auto;
+    }
+
+    .mapa-orbita {
+        height: 250px;
+    }
+
+    .comparacion {
+        grid-template-columns: 1fr;
+    }
+
+    .versus {
+        margin: auto;
+    }
+
+    .vuce-head {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .vuce-head h2 {
+        font-size: 70px;
+    }
+
+    .flujo {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .flecha-flujo {
+        transform: rotate(90deg);
+    }
+
+    .frontera {
+        grid-template-columns: 1fr;
+    }
+
+    .pais-bolivia,
+    .pais-destino {
+        text-align: center;
+        border: 0;
+        min-height: 90px;
+    }
+
+    .puerta {
+        width: 220px;
+        margin: auto;
+    }
+
+    .visual-institucion {
+        width: 280px;
+        height: 250px;
+    }
+
+    .anillo1 { width: 200px; height: 200px; }
+    .anillo2 { width: 250px; height: 250px; }
+
+    .network {
+        width: 90vw;
+        max-width: 500px;
+    }
+
+    .mapa-conexion {
+        transform: scale(.8);
+        transform-origin: center;
+    }
+}
+
+@media (max-width: 600px) {
+
+    h1 { font-size: 36px; }
+    h2 { font-size: 35px; }
+
+    .topline {
+        margin-bottom: 20px;
+    }
+
+    .linea-reveal b {
+        font-size: 8px;
+    }
+
+    .numero-fondo {
+        font-size: 160px;
+    }
+
+    .puerto-copy h2 {
+        font-size: 75px;
+    }
+
+    .documento-digital {
+        min-height: 270px;
+    }
+
+    .mapa-conexion {
+        transform: scale(.55);
+        height: 190px;
+    }
+
+    .controles {
+        bottom: 10px;
+    }
+}
